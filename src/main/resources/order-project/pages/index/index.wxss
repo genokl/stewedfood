@@ -1,0 +1,72 @@
+.header {
+    margin: 90rpx 0 90rpx 50rpx;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    width: 650rpx;
+    height: 300rpx;
+    line-height: 450rpx;
+}
+ 
+.header image {
+    width: 200rpx;
+    height: 200rpx;
+}
+ 
+.content {
+    margin-left: 50rpx;
+    margin-bottom: 90rpx;
+}
+ 
+.content text {
+    display: block;
+    color: #9d9d9d;
+    margin-top: 40rpx;
+}
+ 
+.bottom {
+    border-radius: 80rpx;
+    margin: 70rpx 50rpx;
+    font-size: 35rpx;
+}
+
+/**index.wxss**/
+page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.nav-tabs{
+  width: 100%;
+  height: 75rpx;
+  display: flex;   
+  margin:10rpx 5rpx 15rpx 0rpx;
+}
+.tab-content{
+  flex: 1;
+}
+.default{
+    line-height:75rpx;
+    text-align:center;
+    flex:1;
+    border-bottom:1px solid #eee;
+    color:#000;
+    font-weight:bold;
+    font-size:28rpx;  
+}
+.active{
+    line-height:75rpx;
+    text-align:center;
+    color:#fc5558;
+    flex:1;
+    border-bottom:1px solid red;
+    font-weight:bold;
+    font-size:28rpx;
+}
+.show{
+    display:block;
+    flex: 1;
+}
+.hidden{
+    display:none;
+    flex: 1;
+}
