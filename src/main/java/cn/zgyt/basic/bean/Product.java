@@ -23,6 +23,10 @@ public class Product {
     private Integer id;
     private String title;		   //文章题目
 
+    
+    @ManyToMany(mappedBy = "products")
+    private List<Taste> tastes; 
+    
     @ManyToMany
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @JoinTable(
@@ -43,6 +47,7 @@ public class Product {
     
     @Transient
     private String aroundUrl;    		   //详情页显示，上一条下一条
+    
     
     
 	public Integer getId() {
@@ -129,6 +134,12 @@ public class Product {
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public List<Taste> getTastes() {
+		return tastes;
+	}
+	public void setTastes(List<Taste> tastes) {
+		this.tastes = tastes;
 	}
     
     

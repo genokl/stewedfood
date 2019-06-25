@@ -68,7 +68,7 @@ public final class ResponseUtils {
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
 		try {
-			response.getWriter().write(text.toString());
+			response.getWriter().write(text.toJSONString());
 			response.getWriter().close();
 		} catch (IOException e) {
 			System.out.println(e);

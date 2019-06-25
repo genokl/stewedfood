@@ -11,6 +11,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Product_ {
 
 	public static volatile SingularAttribute<Product, String> keyWords;
+	public static volatile ListAttribute<Product, Taste> tastes;
 	public static volatile SingularAttribute<Product, String> productDetail;
 	public static volatile ListAttribute<Product, ProductType> productTypes;
 	public static volatile SingularAttribute<Product, String> title;
