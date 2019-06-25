@@ -82,11 +82,11 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>cn.zgyt</groupId>
 			<artifactId>core-entities</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>

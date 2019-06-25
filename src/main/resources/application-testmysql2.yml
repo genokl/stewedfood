@@ -1,0 +1,40 @@
+#Version 1.1.1
+server:
+  port: 8055
+  mysql: 
+    host: 123.56.20.119
+    port: 3306
+  APPID: wx12c617ea3e50a343
+  APPSECRET: d0169224cfa5be1f730668f92cc26489
+  
+  
+spring: 
+  application:
+    name: stewedfood
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: wzj@zgyt
+    password: admin123sw21321
+    url: jdbc:mysql://${server.mysql.host}:${server.mysql.port}/stewedfood?characterEncoding=UTF-8&useSSL=true
+ 
+    tomcat:
+      initial-size: 1   #初始化连接大小
+      min-idle: 1   #最小连接池数量
+      max-active: 5    #连接池支持的最大连接数，这里取值为20，表示同时最多有20个数据库连接。设 0 为没有限制。
+      max-wait: 60000   #获取连接时最大等待时间，单位毫秒
+      time-between-eviction-runs-millis: 60000    #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000    # 配置一个连接在池中最小生存的时间，单位是毫秒
+      test-while-idle: true   #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+      test-on-borrow: false   #获取连接时执行检测，建议关闭，影响性能
+      test-on-return: false   #归还连接时执行检测，建议关闭，影响性能
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  
+  
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://p6plus:p6plus@${server.kernel.host}:${server.kernel.port}/eureka/

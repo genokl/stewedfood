@@ -3,12 +3,9 @@ package cn.zgyt.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cn.zgyt.core.entities.http.BaseBean;
 
 /**
  * 工具类
@@ -26,17 +23,17 @@ public class EntityUtils {
 	 * @param charsetname
 	 * @return
 	 */
-	public static List<BaseBean> genSelfUrl(List<BaseBean> ll, String selfurl, Class<?> clazz) {
-		for (int i = 0; i < ll.size(); i++) {
-			BaseBean b = ll.get(i);
-//			List list = getFiledsInfo(b);
-			Map<String,String> m=new HashMap<>();
-			m.put("self", selfurl + getFieldValueByName("id", b));
-			b.setLinks(m);
-			ll.set(i, b);
-		}
-		return ll;
-	}
+//	public static List<BaseBean> genSelfUrl(List<BaseBean> ll, String selfurl, Class<?> clazz) {
+//		for (int i = 0; i < ll.size(); i++) {
+//			BaseBean b = ll.get(i);
+////			List list = getFiledsInfo(b);
+//			Map<String,String> m=new HashMap<>();
+//			m.put("self", selfurl + getFieldValueByName("id", b));
+//			b.setLinks(m);
+//			ll.set(i, b);
+//		}
+//		return ll;
+//	}
 
 	private static Object getFieldValueByName(String fieldName, Object o) {
 		try {

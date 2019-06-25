@@ -15,11 +15,9 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
-import cn.zgyt.core.entities.http.BaseBean;
-
 @Entity
 @Table(name = "am_product")
-public class Product extends BaseBean{
+public class Product {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;

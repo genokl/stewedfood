@@ -11,11 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import cn.zgyt.core.entities.http.BaseBean;
-
 @Entity
 @Table(name = "am_product_type")
-public class ProductType extends BaseBean{
+public class ProductType {
 	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
