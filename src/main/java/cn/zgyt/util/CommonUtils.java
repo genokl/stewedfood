@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,9 @@ public class CommonUtils {
 	public static Integer random(Integer count) {
 		return (int) ((Math.random() * 9 + 1) * (Math.pow(10, count)));
 	}
+	public static String getUUIDString() {
+		return UUID.randomUUID().toString();
+	}
 
 	/**
 	 * md5 编码
@@ -56,7 +60,7 @@ public class CommonUtils {
 		return resultString;
 	}
 
-	private static String byteArrayToHexString(byte b[]) {
+	public static String byteArrayToHexString(byte b[]) {
 		StringBuffer resultSb = new StringBuffer();
 		for (int i = 0; i < b.length; i++)
 			resultSb.append(byteToHexString(b[i]));
@@ -535,6 +539,9 @@ public class CommonUtils {
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
 		return c.getTime();
+	}
+	public static String getBasePath(HttpServletRequest request) {
+		return CommonUtils.getIpAddr(request)+"/"+request.getServerPort()+"/";
 	}
 
 }

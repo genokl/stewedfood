@@ -15,6 +15,11 @@ public class XcxConfig {
 	 */
 	public static String APPSECRET;
 	
+	/**
+	 * 商户ID
+	 */
+	public static String MCHID;
+	
 	
 	public static String getAPPID() {
 		return APPID;
@@ -28,6 +33,13 @@ public class XcxConfig {
 	public static void setAPPSECRET(String aPPSECRET) {
 		APPSECRET = aPPSECRET;
 	}
+	public static String getMCHID() {
+		return MCHID;
+	}
+	public static void setMCHID(String mCHID) {
+		MCHID = mCHID;
+	}
+	
 	
 	
 	

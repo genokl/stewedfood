@@ -4,8 +4,14 @@ server:
   mysql: 
     host: 123.56.20.119
     port: 3306
+  
   APPID: wx4196510759f1f16d
   APPSECRET: 5cfac39d850f24062a9ddd16358cf6a9
+  
+  MCHID:   #商户ID
+  
+  
+  
   
   
 spring: 

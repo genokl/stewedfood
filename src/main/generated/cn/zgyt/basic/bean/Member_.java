@@ -21,6 +21,7 @@ public abstract class Member_ {
 	public static volatile SingularAttribute<Member, Integer> weCatNo;
 	public static volatile SingularAttribute<Member, Integer> isDisplayCartoon;
 	public static volatile SingularAttribute<Member, Date> createTime;
+	public static volatile SingularAttribute<Member, Integer> accessCode;
 	public static volatile SingularAttribute<Member, String> name;
 	public static volatile SingularAttribute<Member, Integer> id;
 	public static volatile SingularAttribute<Member, Integer> memberType;
