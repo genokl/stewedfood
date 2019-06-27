@@ -1,18 +1,19 @@
 package cn.zgyt.util.xcx;
 
-//@Component
-//@ConfigurationProperties
+import org.springframework.stereotype.Component;
+
+@Component
 public class XcxConfig {
 
 	
 	/**
 	 * AppID(应用ID)
 	 */
-	public static String APPID = "wx4196510759f1f16d";
+	public static String APPID ;
 	/**
 	 * AppSecret(应用密钥)
 	 */
-	public static String APPSECRET = "5cfac39d850f24062a9ddd16358cf6a9";
+	public static String APPSECRET;
 	
 	
 	public static String getAPPID() {

@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.zgyt.basic.bean.Member;
 import cn.zgyt.repo.MemberRepository;
+import cn.zgyt.util.CommonUtils;
 @Service
 public class MemberService {
 
@@ -36,6 +37,8 @@ public class MemberService {
 			//添加最新的 会员对象
 			m.setOpenId(tOpenId);
 			m.setCreateTime(new Date());
+			m.setMemberType(1);//默认第一次登录为普通用户
+			m.setAccessCode(CommonUtils.random(5));
 			memberRepository.save(m);
 //			m.setUnionId(tUnionId);
 			return m;

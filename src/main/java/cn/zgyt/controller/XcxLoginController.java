@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +28,9 @@ public class XcxLoginController{
 
 	@Resource(name="memberService")
 	private MemberService memberService;
+	
+	@Autowired
+	private XcxConfig xcxConfig;
 	
 	private Logger log = Logger.getLogger(XcxLoginController.class);
 	/**
@@ -60,10 +64,9 @@ public class XcxLoginController{
 			if((!CommonUtils.checkFull(code))&&isSessionLogin==false){
 //				System.out.println(XcxConfig.getAPPID());
 //				System.out.println("code:"+code);
-				String params = "appid=" + XcxConfig.getAPPID() + "&secret=" +XcxConfig.getAPPSECRET()+"&js_code=" + code + "&grant_type=" + XcxConstant.GRANR_TYPE;
+				String params = "appid=" + xcxConfig.getAPPID() + "&secret=" +xcxConfig.getAPPSECRET()+"&js_code=" + code + "&grant_type=" + XcxConstant.GRANR_TYPE;
 				System.out.println(params);
 			    String userSessionKey = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);
-			    System.out.println(userSessionKey);
 //			    https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
 				JSONObject json = JSONObject.parseObject(userSessionKey);
 				String userInfo = AesCbcUtil.decrypt(encryptedData, json.get("session_key").toString(), iv, "UTF-8");

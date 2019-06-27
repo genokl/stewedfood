@@ -8,13 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 用户表entity
  * 
  * @author wxy
  */
+@ApiModel(value = "Member", description = "微信用户")
 @Entity
 @Table(name = "sf_member")
 public class Member implements Serializable {
@@ -56,12 +61,16 @@ public class Member implements Serializable {
 
 	private Integer remake;
 
-	/**
-	 * 会员类型（0客服 1普通用户）
-	 */
+	
+	@ApiModelProperty(value = "会员类型外键",example="1:普通用户，2管理员")
 	private Integer memberType;
 
+	
 	private Integer isDisplayCartoon;
+	
+	@ApiModelProperty(value = "授权验证码",example="思维随机数")
+	private Integer accessCode;
+	
 
 //    @JsonFilter(format = "yyyy-MM-dd hh:mm:ss")   
 	private Date createTime;
@@ -165,6 +174,18 @@ public class Member implements Serializable {
 
 	public void setCurrentNeeds(Integer currentNeeds) {
 		this.currentNeeds = currentNeeds;
+	}
+
+	public Integer getAccessCode() {
+		return accessCode;
+	}
+
+	public void setAccessCode(Integer accessCode) {
+		this.accessCode = accessCode;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Integer getRemake() {

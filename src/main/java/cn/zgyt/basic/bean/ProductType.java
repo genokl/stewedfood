@@ -11,23 +11,39 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "ProductType", description = "产品种类")
 @Entity
 @Table(name = "am_product_type")
 public class ProductType {
 	
+	@ApiModelProperty(value = "ID")
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-    private String productTypeName;		   //文章题目
+	
+	@ApiModelProperty(value = "文章类型名称")
+    private String productTypeName;		   //文章类型题目
     
+	@ApiModelProperty(value = "文章外键")
     @ManyToMany(mappedBy = "productTypes")
     private List<Product> products;          //1，公司概况  2,联系我们 3，公司要闻，
     							           //卤货单品， 套餐
-    private String productSynopsis;       //概述
-    private String productSynopsisImg;   //预览图 路径 一张图片
+	@ApiModelProperty(value = "文章类型预览")
+    private String productTypeSynopsis;       //概述
+	
+	@ApiModelProperty(value = "文章类型预览图")
+    private String productTypeSynopsisImg;   //预览图 路径 一张图片
+	
+	@ApiModelProperty(value = "是否删除")
     private Integer isDel;  			   //文章删除状态   0未删除  1已删除
     
+	@ApiModelProperty(value = "创建时间")
     private Date createDate;    		   //文章创建时间
+	
+	@ApiModelProperty(value = "排序")
     private Integer orderVal;    		  	   //排序
     
     @Transient
@@ -45,17 +61,17 @@ public class ProductType {
 	public void setProductTypeName(String productTypeName) {
 		this.productTypeName = productTypeName;
 	}
-	public String getProductSynopsis() {
-		return productSynopsis;
+	public String getProductTypeSynopsis() {
+		return productTypeSynopsis;
 	}
-	public void setProductSynopsis(String productSynopsis) {
-		this.productSynopsis = productSynopsis;
+	public void setProductTypeSynopsis(String productTypeSynopsis) {
+		this.productTypeSynopsis = productTypeSynopsis;
 	}
-	public String getProductSynopsisImg() {
-		return productSynopsisImg;
+	public String getProductTypeSynopsisImg() {
+		return productTypeSynopsisImg;
 	}
-	public void setProductSynopsisImg(String productSynopsisImg) {
-		this.productSynopsisImg = productSynopsisImg;
+	public void setProductTypeSynopsisImg(String productTypeSynopsisImg) {
+		this.productTypeSynopsisImg = productTypeSynopsisImg;
 	}
 	public Integer getIsDel() {
 		return isDel;

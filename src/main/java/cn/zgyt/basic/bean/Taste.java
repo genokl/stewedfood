@@ -17,13 +17,19 @@ import org.hibernate.annotations.Cascade;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Taste", description = "口味")
 @Entity
 @Table(name = "am_taste")
 public class Taste {
 
+	@ApiModelProperty(value = "ID")
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+	
 	
 	@JSONField(serialize=false)
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -31,11 +37,12 @@ public class Taste {
     @JoinTable(
     joinColumns = {@JoinColumn(name = "product_id")},
     inverseJoinColumns = {@JoinColumn(name = "taste_id")})
-//	@Transient
 	private List<Product> products;
 	 
 	 
+	@ApiModelProperty(value = "味道名称")
     private String tasteKey;		   //味道名称
+	
     private String tasteVal;		   //味道名称
     
     
