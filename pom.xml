@@ -82,11 +82,13 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>cn.zgyt</groupId>
-			<artifactId>core-entities</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>cn.zgyt</groupId> <artifactId>core-entities</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
+		<dependency>
+			<groupId>com.spring4all</groupId>
+			<artifactId>swagger-spring-boot-starter</artifactId>
+			<version>1.7.1.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

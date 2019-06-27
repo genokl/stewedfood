@@ -15,7 +15,9 @@ Page({
     bottomFlag: false,
     // 提交的订单
     orders: true,
+    //菜品
     menus: [],
+    //菜品种类
     items: [],
     // menus: [{
     //   id: 1,
@@ -127,6 +129,7 @@ Page({
     var items=[];
     let index = event.target.dataset.index;
     items = that.data.menus[index].products
+    // console.log(items)
     that.setData({
       items: items,
       tabIndex: index
@@ -149,6 +152,9 @@ Page({
       })
     }
   },
+  /**
+   * （原）向购物车添加按钮动作
+   */
   addOrder: function(event) {
     let that = this;
     
@@ -202,12 +208,13 @@ Page({
     this.loadMenuInfo(null,this);
   },
   loadMenuInfo: function (select,that){
-    var d={};
+    var dd={};
     if(select!=null){
-      d["select"] = select;
+      dd["select"] = select;
     }
-    comm.globalObj.requestHttps("/xcx/productType/datalist", d, function (d) {
+    comm.globalObj.requestHttps("/xcx/productType/datalist", dd, function (d) {
       if (d.statusCode == 1) {
+        // console.log(d)
         var info=d.info;
         that.initProductTypeList(info, 0, that)
         // console.log(info)
@@ -216,6 +223,15 @@ Page({
         console.log(d.errorMessage)
       }
     })
+  },
+  /**
+   * 菜品选择口味
+   */
+  selectTaste:function(e){
+    let that = this;
+    // console.log(e.target.dataset)
+    var ss=that.getProductfromData(e.target.dataset.id,that);
+    console.log(ss)
   },
   //初始化产品类型列表
   initProductTypeList: function (d,selectIndex,that){
@@ -238,5 +254,15 @@ Page({
     that.setData({
       items: items
     });
+  },
+  //初始化菜品列表
+  getProductfromData: function (id, that) {
+    var items=that.data.items;
+    for (var i = 0; i < items.length;i++){
+      if (items[i].id == id){
+        return items[i];
+      }
+    }
+   
   },
 })

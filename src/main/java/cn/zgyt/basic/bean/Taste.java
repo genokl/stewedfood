@@ -3,6 +3,7 @@ package cn.zgyt.basic.bean;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 @Entity
 @Table(name = "am_taste")
@@ -21,11 +25,13 @@ public class Taste {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 	
-	@ManyToMany
+	@JSONField(serialize=false)
+	@ManyToMany(fetch = FetchType.LAZY)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @JoinTable(
     joinColumns = {@JoinColumn(name = "product_id")},
     inverseJoinColumns = {@JoinColumn(name = "taste_id")})
+//	@Transient
 	private List<Product> products;
 	 
 	 

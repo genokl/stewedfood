@@ -10,7 +10,7 @@
         <image src="image/item-m.jpg"></image>
         <text class="title">{{item.title}}</text>
         <text class="price">￥ {{item.price}} 元/ {{item.unit}}</text>
-        <text class="{{item.active ? 'btn active' : 'btn'}}" bindtap='addOrder' data-id="{{item.id}}" data-index="{{index}}">添加</text>
+        <text class="{{item.active ? 'btn active' : 'btn'}}" bindtap='selectTaste' data-id="{{item.id}}" data-index="{{index}}" >添加</text>
       </view>
     </view>
   </view>
