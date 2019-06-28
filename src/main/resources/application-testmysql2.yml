@@ -9,7 +9,7 @@ server:
   APPSECRET: 5cfac39d850f24062a9ddd16358cf6a9
   MCHID:   #商户ID
   #本地图片访问路径
-  PICPath: /OTA/**
+  PICPath: /xcximg/**
   PICRealPath: E:\git\xcxpic
   
   

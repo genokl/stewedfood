@@ -20,6 +20,9 @@ public class XcxConfig {
 	 */
 	public static String MCHID;
 	
+	public static String PICPath;
+	public static String PICRealPath;
+	
 	
 	public static String getAPPID() {
 		return APPID;
@@ -38,6 +41,18 @@ public class XcxConfig {
 	}
 	public static void setMCHID(String mCHID) {
 		MCHID = mCHID;
+	}
+	public static String getPICPath() {
+		return PICPath;
+	}
+	public static void setPICPath(String pICPath) {
+		PICPath = pICPath;
+	}
+	public static String getPICRealPath() {
+		return PICRealPath;
+	}
+	public static void setPICRealPath(String pICRealPath) {
+		PICRealPath = pICRealPath;
 	}
 	
 	
