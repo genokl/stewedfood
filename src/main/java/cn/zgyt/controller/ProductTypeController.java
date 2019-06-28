@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 @RequestMapping("/xcx/productType")
 public class ProductTypeController {
-
+ 
 	@Autowired
 	private ProductTypeRepository productTypeRepository;
 	@Autowired
