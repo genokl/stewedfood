@@ -4,8 +4,7 @@
     "pages/menu/menu",
     "pages/pay/pay",
     "pages/order/order",
-    "pages/me/me",
-    "component/modal /modal "
+    "pages/me/me"
   ],
   "window": {
     "backgroundTextStyle": "light",

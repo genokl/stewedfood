@@ -229,9 +229,8 @@ Page({
    */
   selectTaste:function(e){
     let that = this;
-    // console.log(e.target.dataset)
-    var ss=that.getProductfromData(e.target.dataset.id,that);
-    console.log(ss)
+    var p=that.getProductfromData(e.target.dataset.id,that);
+    console.log(p)
   },
   //初始化产品类型列表
   initProductTypeList: function (d,selectIndex,that){
