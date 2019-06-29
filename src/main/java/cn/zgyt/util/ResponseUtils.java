@@ -5,7 +5,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.zgyt.util.xcx.XcxConstant;
 import cn.zgyt.util.xcx.XcxUtil;
@@ -19,7 +21,8 @@ public final class ResponseUtils {
 		long lastRequstTime = System.currentTimeMillis();
 		jo.put(XcxConstant.XCX_LAST_REQUEST_TIME,lastRequstTime);
 		jo.put(XcxConstant.XCX_REQUEST_KEY, XcxUtil.createResponseKey(request,lastRequstTime));
-		render1(response, "text/plain;charset=UTF-8", jo.toString());
+		
+		render1(response, "text/plain;charset=UTF-8", JSON.toJSONString(jo, SerializerFeature.DisableCircularReferenceDetect));
 	}
 	
 	/**

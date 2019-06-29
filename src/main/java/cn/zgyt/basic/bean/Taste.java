@@ -35,8 +35,8 @@ public class Taste {
 	@ManyToMany(fetch = FetchType.LAZY)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @JoinTable(
-    joinColumns = {@JoinColumn(name = "product_id")},
-    inverseJoinColumns = {@JoinColumn(name = "taste_id")})
+    joinColumns = {@JoinColumn(name = "taste_id")},
+    inverseJoinColumns = {@JoinColumn(name = "product_id")})
 	private List<Product> products;
 	 
 	 

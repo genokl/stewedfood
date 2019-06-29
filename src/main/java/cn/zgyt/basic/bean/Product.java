@@ -34,6 +34,7 @@ public class Product {
 	@ApiModelProperty(value = "名称")
     private String title;		   //文章题目
 
+	
 	@ApiModelProperty(value = "口味")
     @ManyToMany(mappedBy = "products",fetch = FetchType.LAZY)
     private List<Taste> tastes; 

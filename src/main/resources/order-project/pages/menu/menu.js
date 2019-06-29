@@ -129,7 +129,7 @@ Page({
     var items=[];
     let index = event.target.dataset.index;
     items = that.data.menus[index].products
-    // console.log(items)
+    console.log(items)
     that.setData({
       items: items,
       tabIndex: index

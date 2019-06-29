@@ -1,45 +1,27 @@
-// pages/index/index.js
-const app = getApp()
-var comm = app.comm;
-var tools = app.tools;
+// pages/shoppingcar/shoppingcar.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: 0,
-    tabArray: ["菜单", "购物车", "我"]
+
   },
-  bindChange: function (e) {
-    var that = this;
-    that.setData({ currentTab: e.detail.current });
-  },
-  
-  swichNav: function (e) {
-    var that = this;
-    console.log(e.target)
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-    }
-  }, 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // tools.redirectTo("/pages/menu/menu", "");
+
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
   },
+
   /**
    * 生命周期函数--监听页面显示
    */

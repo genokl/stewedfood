@@ -1,37 +1,42 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/menu/menu",
+    "pages/mine/mine",
     "pages/pay/pay",
     "pages/order/order",
-    "pages/me/me"
+    "pages/shoppingcar/shoppingcar",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "懒狗儿的小店",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
-  "tarBar": {
+  "tabBar": {
+    "color": "#878787",
+    "selectedColor": "#d12a1a",
+    "borderStyle": "white",
+    "backgroundColor": "#fcfcfc",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home-fill.png"
+        "pagePath": "pages/menu/menu",
+        "iconPath": "imgs/tabBar/home_2.png",
+        "selectedIconPath": "imgs/tabBar/home_1.png",
+        "text": "首页"
       },
       {
-        "pagePath": "pages/order/order",
-        "text": "购物车",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home-fill.png"
+        "pagePath": "pages/shoppingcar/shoppingcar",
+        "iconPath": "imgs/tabBar/order_2.png",
+        "selectedIconPath": "imgs/tabBar/order_1.png",
+        "text": "购物车"
       },
       {
-        "pagePath": "pages/me/me",
-        "text": "我",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/home-fill.png"
+        "pagePath": "pages/mine/mine",
+        "iconPath": "imgs/tabBar/mine_2.png",
+        "selectedIconPath": "imgs/tabBar/mine_1.png",
+        "text": "我的"
       }
     ]
   },

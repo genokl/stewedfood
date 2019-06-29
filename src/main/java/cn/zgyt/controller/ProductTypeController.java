@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cn.zgyt.basic.bean.Product;
 import cn.zgyt.basic.bean.ProductType;
 import cn.zgyt.basic.bean.vo.SearchVo;
 import cn.zgyt.repo.ProductRepository;
@@ -46,17 +47,17 @@ public class ProductTypeController {
 			HttpServletResponse response,
 			@RequestBody(required=false) SearchVo sv) throws Exception {
 		Random random = new Random();
-		int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;
-		System.out.println(rannum);
+//		int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;
 		List<ProductType> ll=new ArrayList<>();
 		JSONObject jo=new JSONObject();
 		jo.put(ConstantPoot.STATUS_STR, ConstantPoot.STATUS_INIT);
 		if(sv==null) {
+			List<Product> products = productRepository.findAll();
 //			ProductType pt = sv.getProductType();
 			ll = productTypeRepository.findByIsDelOrderByOrderValAsc(0);
-			if(ll.size()>0) {
-				Integer id = ll.get(0).getId();
-			}
+//			if(ll.size()>0) {
+//				Integer id = ll.get(0).getId();
+//			}
 			jo.put(ConstantPoot.STATUS_INFO_STR, ll);
 			jo.put(ConstantPoot.STATUS_STR, ConstantPoot.STATUS_SUCCESS);
 		}

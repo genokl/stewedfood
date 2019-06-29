@@ -10,7 +10,7 @@ server:
   MCHID:   #商户ID
   #本地图片访问路径
   PICPath: /xcximg/**
-  PICRealPath: E:\git\xcxpic
+  PICRealPath: F:/git/xcxpic/
   
   
   
