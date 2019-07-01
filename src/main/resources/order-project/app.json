@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/menu/menu",
-    "pages/mine/mine",
+    "pages/mime/mime",
     "pages/pay/pay",
     "pages/order/order",
     "pages/shoppingcar/shoppingcar",
@@ -28,12 +28,12 @@
       },
       {
         "pagePath": "pages/shoppingcar/shoppingcar",
-        "iconPath": "imgs/tabBar/order_2.png",
-        "selectedIconPath": "imgs/tabBar/order_1.png",
+        "iconPath": "imgs/tabBar/shopping_nomal.png",
+        "selectedIconPath": "imgs/tabBar/shopping_pressed.png",
         "text": "购物车"
       },
       {
-        "pagePath": "pages/mine/mine",
+        "pagePath": "pages/mime/mime",
         "iconPath": "imgs/tabBar/mine_2.png",
         "selectedIconPath": "imgs/tabBar/mine_1.png",
         "text": "我的"

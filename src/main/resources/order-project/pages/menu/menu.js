@@ -3,6 +3,7 @@
 const app = getApp()
 var comm = app.comm;
 var tools = app.tools;
+var config = app.config;
 
 Page({
   data: {
