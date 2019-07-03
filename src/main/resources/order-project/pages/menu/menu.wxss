@@ -1,4 +1,5 @@
 /**index.wxss**/
+@import "/pages/template/addchar/addchar.wxss";
 .container{
   position:absolute;
   width:100%;

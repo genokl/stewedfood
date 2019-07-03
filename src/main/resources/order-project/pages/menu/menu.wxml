@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<import src="/pages/template/addchar/addchar"/> 
 <view class="container">
   <view class="aside">
     <view class="{{tabIndex === index ? 'menu active' : 'menu'}}" wx:for="{{menus}}" wx:key="{{item.id}}" data-index="{{index}}" bindtap='tabMenu'>{{item.productTypeName}}
@@ -27,9 +28,10 @@
 <modal wx:if="{{tasteModal}}"  bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
     <view class='modal-content'>
       <scroll-view scroll-y class='main-content'>
-        <view>这里面可替换成你想显示的其他内容</view>
-        <view>这里面可替换成你想显示的其他内容</view>
-        <text>这里面可替换成你想显示的其他内容</text>
+        <view  wx:for="{{tasteList}}" wx:key="{{item.id}}"  data-index="{{index}}">
+          <view>{{item.tasteKey}}</view>
+        </view>
+        <template is='addchar' data='{{selectCount}}'/>
       </scroll-view>
     </view>
   </modal>

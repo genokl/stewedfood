@@ -7,6 +7,8 @@ var config = app.config;
 
 Page({
   data: {
+    selectCount:0,
+    tasteList: [],
     tasteModal: false, // 显示modal弹窗
     tabIndex: 0,
     // 统计商品数量和价格
@@ -21,99 +23,6 @@ Page({
     menus: [],
     //菜品种类
     items: [],
-    // menus: [{
-    //   id: 1,
-    //   menu: '菜单一'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单一'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单一'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单二'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单三'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单四'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }, {
-    //   id: 1,
-    //   menu: '菜单五'
-    // }],
-    // // 商品列表
-    // items: [{
-    //   id: 1,
-    //   title: '湖南辣椒小炒肉1',
-    //   price: 12,
-    //   active: false,
-    //   num: 1
-    // }, {
-    //   id: 2,
-    //   title: '湖南辣椒小炒肉2',
-    //   price: 13,
-    //   active: false,
-    //   num: 1
-    // }, {
-    //   id: 3,
-    //   title: '湖南辣椒小炒肉3',
-    //   price: 14,
-    //   active: false,
-    //   num: 1
-    // }, {
-    //   id: 4,
-    //   title: '湖南辣椒小炒肉4',
-    //   price: 15,
-    //   active: false,
-    //   num: 1
-    // }, {
-    //   id: 5,
-    //   title: '湖南辣椒小炒肉5',
-    //   price: 16,
-    //   active: false,
-    //   num: 1
-    // }, {
-    //   id: 6,
-    //   title: '湖南辣椒小炒肉5',
-    //   price: 17,
-    //   active: false,
-    //   num: 1
-    // }, {
-    //   id: 7,
-    //   title: '湖南辣椒小炒肉5',
-    //   price: 18,
-    //   active: false,
-    //   num: 1
-    // }]
   },
   // 下拉刷新
   onPullDownRefresh: function () {
@@ -212,13 +121,15 @@ Page({
   onLoad: function() {
     this.loadMenuInfo(null,this);
   },
- 
+  // onShow: function () {
+  //   // this.loadMenuInfo(null, this);
+  //   this.loadMenuInfo(null, this);
+  // },
   loadMenuInfo: function (select,that){
     var dd={};
     if(select!=null){
       dd["select"] = select;
     }
-    
     comm.globalObj.requestHttps("/xcx/productType/datalist", dd, function (d) {
       if (d.statusCode == 1) {
         // console.log(d)
@@ -241,9 +152,7 @@ Page({
   },
   //显示口味选择弹出框
   showtesteModal: function (p) {
-    this.setData({
-      tasteModal: true, // 显示modal弹窗
-    });
+    console.log(p.tastes)
     //将选择产品设置到购物车中
     var select={};
     select["tastes"] = p.tastes[0];//选择某种口味
@@ -251,6 +160,10 @@ Page({
     select["count"] = 10;
     select["childAmount"] = p.price * select["count"];
     this.addProductToCar(select)
+    this.setData({
+      tasteList: p.tastes,
+      tasteModal: true, // 显示modal弹窗
+    });
   },
   //将选中的产品天际到购物车
   addProductToCar: function (s) {
@@ -296,23 +209,37 @@ Page({
   },
   //判断购物车里是否有同种产品
   judgeCarisExistProduct: function (s,shoppingcar) {
-    
+    console.log(shoppingcar.length)
     for (var i = 0; i < shoppingcar.length;i++){
       var sci=shoppingcar[i];
       // console.log(sci)
       var ss = sci.product.title +":"+ sci.tastes.tasteKey;
       var si = s.product.title + ":" + s.tastes.tasteKey;
       if (si==ss){
-        // console.log(s)
         sci["count"] = sci.count + s.count;
         sci["childAmount"] = sci.count * sci.product.price;
-        shoppingcar[i] = sci;
+        shoppingcar[i] = null;
+        shoppingcar.push(sci);
         return true;
       }
     };
     wx.setStorageSync('shoppingcar', shoppingcar);
-    console.log(shoppingcar)
     return false;
+  },
+  //加号动作
+  addCount: function (e) {
+    this.setData({
+      selectCount: this.data.selectCount+1, // 显示modal弹窗
+    });
+  }, 
+  //减号动作
+  delCount: function (e) {
+    var selectCount=this.data.selectCount;
+    if (selectCount>0){
+      this.setData({
+        selectCount: this.data.selectCount - 1, // 显示modal弹窗
+      });
+    }
   },
   //口味选择弹出框取消动作
   modalCancel: function () {
@@ -322,6 +249,7 @@ Page({
   },
   //口味选择弹出框确定动作
   modalConfirm: function () {
+    var selectCount=this.data.selectCount;
     this.setData({
       tasteModal: false, // 显示modal弹窗
     });

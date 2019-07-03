@@ -1,0 +1,12 @@
+<template name="addchar">
+  <!--菜单弹出框加减号模版-->
+  <!-- 主容器 -->  
+  <view class="stepper">  
+      <!-- 减号 -->  
+      <text class="{{count <= 1 ? 'disabled' : 'normal'}}" bindtap="delCount" data-index="{{index}}">-</text>  
+      <!-- 数值 -->  
+      <input type="number" bindchange="bindManual" value="{{selectCount}}"  disabled="disabled"/>  
+      <!-- 加号 -->  
+      <text class="{{count >= 10 ? 'disabled' : 'normal'}}" bindtap="addCount" data-index="{{index}}">+</text>  
+  </view>  
+</template>
