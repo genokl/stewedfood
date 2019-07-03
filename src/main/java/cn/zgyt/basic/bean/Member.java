@@ -2,14 +2,19 @@ package cn.zgyt.basic.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -68,9 +73,11 @@ public class Member implements Serializable {
 	
 	private Integer isDisplayCartoon;
 	
-	@ApiModelProperty(value = "授权验证码",example="思维随机数")
+	@ApiModelProperty(value = "授权验证码",example="四位随机数")
 	private Integer accessCode;
 	
+//	@OneToMany(targetEntity=Order.class, mappedBy="member", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+//	private List<Order> orders;
 
 //    @JsonFilter(format = "yyyy-MM-dd hh:mm:ss")   
 	private Date createTime;

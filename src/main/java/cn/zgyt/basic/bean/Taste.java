@@ -1,5 +1,6 @@
 package cn.zgyt.basic.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,7 +24,13 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "Taste", description = "口味")
 @Entity
 @Table(name = "am_taste")
-public class Taste {
+public class Taste  implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9048229887569197415L;
+
 
 	@ApiModelProperty(value = "ID")
 	@Id 

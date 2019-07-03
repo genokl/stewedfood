@@ -1,8 +1,10 @@
 package cn.zgyt.basic.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,8 +26,14 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "Product", description = "食品")
 @Entity
 @Table(name = "am_product")
-public class Product {
+public class Product implements Serializable {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2757253055452627240L;
+
 	@ApiModelProperty(value = "ID")
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,8 +49,7 @@ public class Product {
     
 	@JSONField(serialize=false)
 	@ApiModelProperty(value = "种类")
-    @ManyToMany
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
     joinColumns = {@JoinColumn(name = "product_id")},
     inverseJoinColumns = {@JoinColumn(name = "product_type_id")})

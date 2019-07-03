@@ -1,5 +1,6 @@
 package cn.zgyt.basic.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +18,13 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "ProductType", description = "产品种类")
 @Entity
 @Table(name = "am_product_type")
-public class ProductType {
+public class ProductType  implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4703628177604858246L;
+
 	@ApiModelProperty(value = "ID")
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
