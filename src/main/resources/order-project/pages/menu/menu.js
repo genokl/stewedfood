@@ -7,6 +7,7 @@ var config = app.config;
 
 Page({
   data: {
+    tasteModal: false, // 显示modal弹窗
     tabIndex: 0,
     // 统计商品数量和价格
     orderCount: {
@@ -204,10 +205,14 @@ Page({
       data: subOrders
     });
   },
+  onReady: function () {
+   
+  },
   //{ "mess": JSON.stringify(mess) }
   onLoad: function() {
     this.loadMenuInfo(null,this);
   },
+ 
   loadMenuInfo: function (select,that){
     var dd={};
     if(select!=null){
@@ -229,10 +234,30 @@ Page({
    * 菜品选择口味
    */
   selectTaste:function(e){
-    let that = this;
-    var p=that.getProductfromData(e.target.dataset.id,that);
-    console.log(p)
+    var that = this;
+    var p = this.getProductfromData(e.target.dataset.id, this);
+    this.showtesteModal(p);
   },
+  //显示口味选择弹出框
+  showtesteModal: function (p) {
+    console.log(p)
+    this.setData({
+      tasteModal: true, // 显示modal弹窗
+    });
+  },
+  //口味选择弹出框取消动作
+  modalCancel: function () {
+    this.setData({
+      tasteModal: false, // 显示modal弹窗
+    });
+  },
+  //口味选择弹出框确定动作
+  modalConfirm: function () {
+    this.setData({
+      tasteModal: false, // 显示modal弹窗
+    });
+  },
+
   //初始化产品类型列表
   initProductTypeList: function (d,selectIndex,that){
       var menus=[];
