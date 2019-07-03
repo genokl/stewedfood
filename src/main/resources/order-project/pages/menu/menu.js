@@ -246,8 +246,7 @@ Page({
     });
     //将选择产品设置到购物车中
     var select={};
-    select["tastes"] = p.tastes[0];
-    p.tastes=null;
+    select["tastes"] = p.tastes[0];//选择某种口味
     select["product"]=p;
     select["count"] = 10;
     select["childAmount"] = p.price * select["count"];
@@ -255,37 +254,65 @@ Page({
   },
   //将选中的产品天际到购物车
   addProductToCar: function (s) {
-    wx.getStorage({
-      key: config.shoppingcarStr,
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          items: res.data
-        });
-        // 价格统计汇总
-        let money = 0;
-        let num = res.data.length;
-        res.data.forEach(item => {
-          money += (item.price * item.num); // 总价格求和
-        });
-        let orderCount = {
-          num,
-          money
-        }
-        // 设置显示对应的总数和全部价钱
-        that.setData({
-          orderCount
-        });
-      },
-      fail: function (res) {
-        var shoppingcar=[];
+    var shoppingcar=wx.getStorageSync("shoppingcar");
+    if (shoppingcar.length==0){//第一次添加购物车
+      var shoppingcar = [];
         shoppingcar.push(s);
-        wx.setStorage({
-          key: "shoppingcar",
-          data: shoppingcar,
-        })
+        wx.setStorageSync('shoppingcar', shoppingcar);
+    } else {//第一次添加购物车
+      if (this.judgeCarisExistProduct(s, shoppingcar)){
+        //购物车存在该货物
+        console.log(32143)
+
+      }else{
+        //购物车不存在该货物
+        console.log(1321)
+        shoppingcar.push(s)
       }
-    })
+    }
+        // that.setData({
+        //   items: res.data
+        // });
+        // // 价格统计汇总
+        // let money = 0;
+        // let num = res.data.length;
+        // res.data.forEach(item => {
+        //   money += (item.price * item.num); // 总价格求和
+        // });
+        // let orderCount = {
+        //   num,
+        //   money
+        // }
+        // // 设置显示对应的总数和全部价钱
+        // that.setData({
+        //   orderCount
+        // });
+        // var shoppingcar=[];
+        // shoppingcar.push(s);
+        // wx.setStorageSync({
+        //   key: "shoppingcar",
+        //   data: shoppingcar,
+        // })
+  },
+  //判断购物车里是否有同种产品
+  judgeCarisExistProduct: function (s,shoppingcar) {
+    
+    for (var i = 0; i < shoppingcar.length;i++){
+      var sci=shoppingcar[i];
+      // console.log(sci)
+      var ss = sci.product.title +":"+ sci.tastes.tasteKey;
+      var si = s.product.title + ":" + s.tastes.tasteKey;
+      if (si==ss){
+        // console.log(s)
+        sci["count"] = sci.count + s.count;
+        sci["childAmount"] = sci.count * sci.product.price;
+        shoppingcar[i] = sci;
+        return true;
+      }
+    };
+    wx.setStorageSync('shoppingcar', shoppingcar);
+    console.log(shoppingcar)
+    return false;
   },
   //口味选择弹出框取消动作
   modalCancel: function () {
@@ -315,7 +342,7 @@ Page({
   },
   //初始化菜品列表
   initProductList: function (d, that) {
-    console.log(d)
+    // console.log(d)
     var items = [];
     items = d
     that.setData({
