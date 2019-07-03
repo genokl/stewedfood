@@ -9,7 +9,8 @@ var globalObj = {
     //调用方法
     var sessionId = wx.getStorageSync("loginSessionId"),
       xcxLastRequestTime = wx.getStorageSync("xcxLastRequesstatusCodetTime"),
-      headerData = {}, isLogin = false;
+      headerData = {},
+      isLogin = false;
     // 判断session是否过期
     if ((!isNaN(xcxLastRequestTime)) && xcxLastRequestTime != "") {
       if (loginType == 1) {
@@ -83,7 +84,11 @@ var globalObj = {
         header: { 'content-type': 'application/x-www-form-urlencoded', 'Cookie': 'JSESSIONID=' + wx.getStorageSync("loginSessionId") },
         success: function (res) {
           wx.setStorage({ key: 'xcxLastRequestTime', data: res.data.xcxLastRequestTime });
-          callbackFn(res.data);
+          if (res.data.statsus == null) {
+            callbackFn(res.data);
+          } else {
+            callbackFn(res.data);
+          }
         },
         fail: function () { console.log("请求失败！" + url) }, complete: function () { }
       })

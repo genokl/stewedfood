@@ -20,7 +20,7 @@
         合计 <text class="num">{{orderCount.money}} 元</text> 
     </view>
     <view class="btn">
-        <text bindtap='pay'>下单</text>
+        <text bindtap='pay'>结账</text>
     </view>
   </view>
 </view>

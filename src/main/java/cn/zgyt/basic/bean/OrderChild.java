@@ -31,6 +31,9 @@ public class OrderChild  implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 	
+	@ApiModelProperty(value = "子项支付金额,单位：分")
+    private String childAmount;		   //支付金额
+	
 	@ApiModelProperty(value = "订单创建时间")
 	private Date cteateDate;	
 
@@ -45,7 +48,7 @@ public class OrderChild  implements Serializable {
 //	@ManyToOne(targetEntity=Order.class,fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 //	private Order order;
 	
-	@ApiModelProperty(value = "产品口味外键")
+	@ApiModelProperty(value = "产品口味 外键")
 	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	private Taste taste;
 
@@ -94,6 +97,14 @@ public class OrderChild  implements Serializable {
 
 	public void setTaste(Taste taste) {
 		this.taste = taste;
+	}
+
+	public String getChildAmount() {
+		return childAmount;
+	}
+
+	public void setChildAmount(String childAmount) {
+		this.childAmount = childAmount;
 	}
     
 	

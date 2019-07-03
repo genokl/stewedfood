@@ -9,7 +9,8 @@ var globalObj = {
     //调用方法
     var sessionId = wx.getStorageSync("loginSessionId"),
       xcxLastRequestTime = wx.getStorageSync("xcxLastRequesstatusCodetTime"),
-      headerData = {}, isLogin = false;
+      headerData = {}, 
+      isLogin = false;
     // 判断session是否过期
     if ((!isNaN(xcxLastRequestTime)) && xcxLastRequestTime != "") {
       if (loginType == 1) {
@@ -31,21 +32,21 @@ var globalObj = {
     if (isLogin == false) {
       wx.login({
         success: function (res) {
-          wx.getUserInfo({
-            success: function (infoData) {
-              var da = infoData.userInfo;
+          // wx.getUserInfo({
+            // success: function (infoData) {
+              // var da = infoData.userInfo;
               wx.request({
                 url: Config.basePath + '/xcxlogin/login.do',
                 data:
                 {
                   'code': res.code,
-                  'iv': infoData.iv,
-                  'encryptedData': infoData.encryptedData,
+                  // 'iv': infoData.iv,
+                  // 'encryptedData': infoData.encryptedData,
                   'xcxLastRequestTime': xcxLastRequestTime,
-                  'nikeName': da.nikeName,
-                  "city": da.city,
-                  "province": da.province,
-                  "country": da.country,
+                  // 'nikeName': da.nikeName,
+                  // "city": da.city,
+                  // "province": da.province,
+                  // "country": da.country,
                 },
                 method: 'GET',
                 header: headerData,
@@ -59,8 +60,8 @@ var globalObj = {
                   callbackFn(loginData.data);
                 }
               })
-            }
-          })
+            // }
+          // })
         }
       })
     }

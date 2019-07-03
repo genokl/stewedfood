@@ -218,6 +218,7 @@ Page({
     if(select!=null){
       dd["select"] = select;
     }
+    
     comm.globalObj.requestHttps("/xcx/productType/datalist", dd, function (d) {
       if (d.statusCode == 1) {
         // console.log(d)
@@ -240,10 +241,51 @@ Page({
   },
   //显示口味选择弹出框
   showtesteModal: function (p) {
-    console.log(p)
     this.setData({
       tasteModal: true, // 显示modal弹窗
     });
+    //将选择产品设置到购物车中
+    var select={};
+    select["tastes"] = p.tastes[0];
+    p.tastes=null;
+    select["product"]=p;
+    select["count"] = 10;
+    select["childAmount"] = p.price * select["count"];
+    this.addProductToCar(select)
+  },
+  //将选中的产品天际到购物车
+  addProductToCar: function (s) {
+    wx.getStorage({
+      key: config.shoppingcarStr,
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          items: res.data
+        });
+        // 价格统计汇总
+        let money = 0;
+        let num = res.data.length;
+        res.data.forEach(item => {
+          money += (item.price * item.num); // 总价格求和
+        });
+        let orderCount = {
+          num,
+          money
+        }
+        // 设置显示对应的总数和全部价钱
+        that.setData({
+          orderCount
+        });
+      },
+      fail: function (res) {
+        var shoppingcar=[];
+        shoppingcar.push(s);
+        wx.setStorage({
+          key: "shoppingcar",
+          data: shoppingcar,
+        })
+      }
+    })
   },
   //口味选择弹出框取消动作
   modalCancel: function () {

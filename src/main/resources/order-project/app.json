@@ -33,6 +33,12 @@
         "text": "购物车"
       },
       {
+        "pagePath": "pages/order/order",
+        "iconPath": "imgs/tabBar/order_2.png",
+        "selectedIconPath": "imgs/tabBar/order_1.png",
+        "text": "订单"
+      },
+      {
         "pagePath": "pages/mime/mime",
         "iconPath": "imgs/tabBar/mine_2.png",
         "selectedIconPath": "imgs/tabBar/mine_1.png",
