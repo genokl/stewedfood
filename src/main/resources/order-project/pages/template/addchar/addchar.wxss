@@ -5,7 +5,7 @@
     /*给主容器设一个边框*/  
     border: 1rpx solid #000000;  
     border-radius: 3px;  
-    margin:0 auto;  
+    margin-left:370rpx;
 }  
   
 /*加号和减号*/  
