@@ -112,27 +112,32 @@ Page({
   onLoad: function() {
     let that = this;
     // 取出订单传过来的数据
-    wx.getStorage({
-      key: 'orders',
-      success: function (res) {
-        that.setData({
-          items: res.data
-        });
-        // 价格统计汇总
-        let money = 0;
-        let num = res.data.length;
-        res.data.forEach(item => {
-          money += (item.price*item.num); // 总价格求和
-        });
-        let orderCount = {
-          num,
-          money
-        }
-        // 设置显示对应的总数和全部价钱
-        that.setData({
-          orderCount
-        });
-      }
-    })
+    that.initshopcardata();
+    // wx.getStorage({
+    //   key: 'shoppingcar',
+    //   success: function (res) {
+    //     that.setData({
+    //       items: res.data
+    //     });
+    //     // 价格统计汇总
+    //     let money = 0;
+    //     let num = res.data.length;
+    //     res.data.forEach(item => {
+    //       money += (item.price*item.num); // 总价格求和
+    //     });
+    //     let orderCount = {
+    //       num,
+    //       money
+    //     }
+    //     // 设置显示对应的总数和全部价钱
+    //     that.setData({
+    //       orderCount
+    //     });
+    //   }
+    // })
+  },
+  initshopcardata:function(d){
+    var shoppingcar=wx.setStorageSync("shoppingcar");
+    console.log(shoppingcar)
   }
 })

@@ -208,7 +208,6 @@ Page({
     var res=false;
     for (var i = 0; i < shoppingcar.length;i++){
         var sci=shoppingcar[i];
-           console.log(shoppingcar[i])
         if (s.productStr == sci.productStr){
           sci["count"] = sci["count"] + s["count"]
           sci["childAmount"] = sci["count"] * sci["product"]["price"]
@@ -219,8 +218,9 @@ Page({
     };
     // console.log(!res)
     if (!res){
-      console.log(shoppingcar)
+      shoppingcar.push(s)
     }
+    // console.log(shoppingcar)
     wx.setStorageSync('shoppingcar', shoppingcar);
   },
 
