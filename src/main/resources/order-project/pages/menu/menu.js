@@ -174,9 +174,7 @@ Page({
     // console.log(shoppingcar)
     if (shoppingcar.length==0){//购物车为空
         var shoppingcar = [];
-        var ss = [];
-        ss.push(s);
-        shoppingcar.push(ss);
+        shoppingcar.push(s);
         wx.setStorageSync('shoppingcar', shoppingcar);
     } else {//第一次添加购物车
       this.judgeAndAddCar(s, shoppingcar);
@@ -209,24 +207,19 @@ Page({
   judgeAndAddCar: function (s,shoppingcar) {
     var res=false;
     for (var i = 0; i < shoppingcar.length;i++){
-      var scis=shoppingcar[i];
-      for (var j = 0; j < scis.length; j++) {
-          // console.log(scis[j])
-          var sci = scis[j];
-          if (s.productStr == sci.productStr){//同口味同产品
-              sci["count"] = sci["count"] + s["count"]
-              sci["childAmount"] = sci["count"] * sci["product"]["price"]
-              res=true;
-              scis[j]=sci;
-          } else {//不同口味同产品
-              
-          }
-      }
-      shoppingcar[i] = scis;
+        var sci=shoppingcar[i];
+           console.log(shoppingcar[i])
+        if (s.productStr == sci.productStr){
+          sci["count"] = sci["count"] + s["count"]
+          sci["childAmount"] = sci["count"] * sci["product"]["price"]
+            res=true;
+            shoppingcar[i]=sci;
+            // console.log(s)
+        }
     };
-    console.log(shoppingcar)
+    // console.log(!res)
     if (!res){
-      // console.log(shoppingcar)
+      console.log(shoppingcar)
     }
     wx.setStorageSync('shoppingcar', shoppingcar);
   },
@@ -265,8 +258,9 @@ Page({
     var selectCount = that.data.selectCount;
     //将选择产品设置到购物车中
     if (tools.notNull(chosetaste["tasteKey"]) && selectCount!=0){
+      // console.log(chosetaste)
       var select = {};
-      select["taste"] = chosetaste ;//选择某种口味
+      select["tastes"] = chosetaste ;//选择某种口味
       select["product"] = p;
       select["productStr"] = p.title+":"+ chosetaste.tasteKey;
       select["count"] = selectCount;
@@ -293,7 +287,7 @@ Page({
         }
         menus[i] = d[i];
       }
-      that.setData({
+    that.setData({
         menus: menus
       });
   },
