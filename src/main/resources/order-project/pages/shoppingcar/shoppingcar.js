@@ -137,7 +137,10 @@ Page({
     // })
   },
   initshopcardata:function(d){
-    var shoppingcar=wx.setStorageSync("shoppingcar");
+    var shoppingcar = wx.getStorageSync('shoppingcar');
+    if (shoppingcar.length>0){
+
+    }
     console.log(shoppingcar)
   }
 })
