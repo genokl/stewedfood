@@ -40,6 +40,8 @@ public class Member implements Serializable {
 	private String name;
 
 	private String nickName;
+	
+	private String sessionKey;
 
 	/**
 	 * 头像外键Id
@@ -229,6 +231,14 @@ public class Member implements Serializable {
 
 	public Member() {
 		super();
+	}
+
+	public String getSessionKey() {
+		return sessionKey;
+	}
+
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
 	}
 
 }

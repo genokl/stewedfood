@@ -69,8 +69,11 @@ public class XcxLoginController{
 			    String userSessionKey = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);
 //			    https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
 				JSONObject json = JSONObject.parseObject(userSessionKey);
-				String userInfo = AesCbcUtil.decrypt(encryptedData, json.get("session_key").toString(), iv, "UTF-8");
-				loginMember=memberService.mergeMembersByWebJSONAndXcxJSON(userInfo, XcxConfig.getAPPSECRET());
+//				String userInfo = AesCbcUtil.decrypt(encryptedData, json.get("session_key").toString(), iv, "UTF-8");
+				Member m=new Member();
+				m.setOpenId(json.get("openid").toString());
+				m.setSessionKey(json.get("session_key").toString());
+				loginMember=memberService.mergeMembersByWebJSONAndXcxJSON(m, XcxConfig.getAPPSECRET());
 				isLoginTrue=true;
 				statusCode=1;
 			}else{

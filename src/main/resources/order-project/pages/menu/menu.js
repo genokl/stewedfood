@@ -8,6 +8,8 @@ var config = app.config;
 Page({
   data: {
     selectCount:0,
+    chosetaste:"",
+    choseproduct: {},
     tasteList: [],
     tasteModal: false, // 显示modal弹窗
     tabIndex: 0,
@@ -150,38 +152,34 @@ Page({
     var p = this.getProductfromData(e.target.dataset.id, this);
     this.showtesteModal(p);
   },
+  //选中某个口味
+  chosetaste: function (e) {
+    var that = this;
+    this.setData({
+      chosetaste: e.target.dataset.key,
+    });
+    // console.log(e.target.dataset.key)
+  },
   //显示口味选择弹出框
   showtesteModal: function (p) {
-    console.log(p.tastes)
-    //将选择产品设置到购物车中
-    var select={};
-    select["tastes"] = p.tastes[0];//选择某种口味
-    select["product"]=p;
-    select["count"] = 10;
-    select["childAmount"] = p.price * select["count"];
-    this.addProductToCar(select)
     this.setData({
       tasteList: p.tastes,
       tasteModal: true, // 显示modal弹窗
+      choseproduct:p
     });
   },
-  //将选中的产品天际到购物车
+  //将选中的产品添加到购物车
   addProductToCar: function (s) {
     var shoppingcar=wx.getStorageSync("shoppingcar");
-    if (shoppingcar.length==0){//第一次添加购物车
-      var shoppingcar = [];
-        shoppingcar.push(s);
+    // console.log(shoppingcar)
+    if (shoppingcar.length==0){//购物车为空
+        var shoppingcar = [];
+        var ss = [];
+        ss.push(s);
+        shoppingcar.push(ss);
         wx.setStorageSync('shoppingcar', shoppingcar);
     } else {//第一次添加购物车
-      if (this.judgeCarisExistProduct(s, shoppingcar)){
-        //购物车存在该货物
-        console.log(32143)
-
-      }else{
-        //购物车不存在该货物
-        console.log(1321)
-        shoppingcar.push(s)
-      }
+      this.judgeAndAddCar(s, shoppingcar);
     }
         // that.setData({
         //   items: res.data
@@ -208,24 +206,31 @@ Page({
         // })
   },
   //判断购物车里是否有同种产品
-  judgeCarisExistProduct: function (s,shoppingcar) {
-    console.log(shoppingcar.length)
+  judgeAndAddCar: function (s,shoppingcar) {
+    var res=false;
     for (var i = 0; i < shoppingcar.length;i++){
-      var sci=shoppingcar[i];
-      // console.log(sci)
-      var ss = sci.product.title +":"+ sci.tastes.tasteKey;
-      var si = s.product.title + ":" + s.tastes.tasteKey;
-      if (si==ss){
-        sci["count"] = sci.count + s.count;
-        sci["childAmount"] = sci.count * sci.product.price;
-        shoppingcar[i] = null;
-        shoppingcar.push(sci);
-        return true;
+      var scis=shoppingcar[i];
+      for (var j = 0; j < scis.length; j++) {
+          // console.log(scis[j])
+          var sci = scis[j];
+          if (s.productStr == sci.productStr){//同口味同产品
+              sci["count"] = sci["count"] + s["count"]
+              sci["childAmount"] = sci["count"] * sci["product"]["price"]
+              res=true;
+              scis[j]=sci;
+          } else {//不同口味同产品
+              
+          }
       }
+      shoppingcar[i] = scis;
     };
+    console.log(shoppingcar)
+    if (!res){
+      // console.log(shoppingcar)
+    }
     wx.setStorageSync('shoppingcar', shoppingcar);
-    return false;
   },
+
   //加号动作
   addCount: function (e) {
     this.setData({
@@ -245,14 +250,38 @@ Page({
   modalCancel: function () {
     this.setData({
       tasteModal: false, // 显示modal弹窗
+      selectCount: 0,
+      chosetaste: "",
+      choseproduct: {},
+      tasteList: [],
     });
   },
   //口味选择弹出框确定动作
   modalConfirm: function () {
-    var selectCount=this.data.selectCount;
-    this.setData({
+    var that=this;
+    var p = that.data.choseproduct;
+    var chosetaste={};
+    chosetaste["tasteKey"] = that.data.chosetaste;
+    var selectCount = that.data.selectCount;
+    //将选择产品设置到购物车中
+    if (tools.notNull(chosetaste["tasteKey"]) && selectCount!=0){
+      var select = {};
+      select["taste"] = chosetaste ;//选择某种口味
+      select["product"] = p;
+      select["productStr"] = p.title+":"+ chosetaste.tasteKey;
+      select["count"] = selectCount;
+      select["childAmount"] = p.price * select["count"];
+      // console.log(select)
+      that.addProductToCar(select)
+    }
+    that.setData({
       tasteModal: false, // 显示modal弹窗
+      selectCount: 0,
+      chosetaste: "",
+      choseproduct: {},
+      tasteList: [],
     });
+
   },
 
   //初始化产品类型列表
@@ -264,7 +293,7 @@ Page({
         }
         menus[i] = d[i];
       }
-    that.setData({
+      that.setData({
         menus: menus
       });
   },
