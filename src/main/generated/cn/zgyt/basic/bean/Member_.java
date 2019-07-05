@@ -10,6 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Member_ {
 
 	public static volatile SingularAttribute<Member, String> unionId;
+	public static volatile SingularAttribute<Member, String> sessionKey;
 	public static volatile SingularAttribute<Member, String> headImg;
 	public static volatile SingularAttribute<Member, String> openId;
 	public static volatile SingularAttribute<Member, String> nickName;

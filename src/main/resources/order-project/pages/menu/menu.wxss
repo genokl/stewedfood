@@ -2,7 +2,6 @@
 @import "/pages/template/addchar/addchar.wxss";
 .textMes{
   width:150rpx;
-  border:1px solid #777777;
   text-align:center;
   display:inline-block;
   margin-left:30rpx;
@@ -11,6 +10,23 @@
   line-height:60rpx;
   color:#000;
   margin-bottom:50rpx;
+}
+.tprice{
+  color: red;
+  line-height:22rpx;
+}
+.modal-title{
+  width:28rpx;
+  float:left;
+}
+.modal-num{
+  width:75rpx;
+  float:left;
+  font-size:47rpx;
+  text-align:center;
+}
+.active {
+  background-color: yellowgreen;
 }
 .container{
   position:absolute;

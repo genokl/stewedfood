@@ -7,6 +7,7 @@ var config = app.config;
 
 Page({
   data: {
+    selected:[],
     selectCount:0,
     chosetaste:"",
     choseproduct: {},
@@ -154,9 +155,11 @@ Page({
   },
   //选中某个口味
   chosetaste: function (e) {
+    console.log(e)
     var that = this;
     this.setData({
-      chosetaste: e.target.dataset.key,
+      selected:true,
+      chosetaste: e.detail.value,
     });
     // console.log(e.target.dataset.key)
   },
@@ -170,6 +173,7 @@ Page({
   },
   //将选中的产品添加到购物车
   addProductToCar: function (s) {
+    console.log(s)
     var shoppingcar=wx.getStorageSync("shoppingcar");
     // console.log(shoppingcar)
     if (shoppingcar.length==0){//购物车为空
@@ -216,9 +220,10 @@ Page({
             // console.log(s)
         }
     };
+    shoppingcar.push(s)
     // console.log(!res)
     if (!res){
-      shoppingcar.push(s)
+      // shoppingcar.push(s)
     }
     // console.log(shoppingcar)
     wx.setStorageSync('shoppingcar', shoppingcar);

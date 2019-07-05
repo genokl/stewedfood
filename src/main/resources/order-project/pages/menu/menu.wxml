@@ -26,14 +26,29 @@
   </view>
    
   <modal wx:if="{{tasteModal}}"  bindcancel="modalCancel" bindconfirm='modalConfirm' single='{{single}}'>
+    <view style='text-align:center;font-weight:600;font-size:35rpx;'>{{choseproduct.title}}</view>
     <view class='modal-content'>
       <scroll-view scroll-y class='main-content'>
-        <view class='textMes' wx:for="{{tasteList}}" wx:key="{{item.id}}"  data-index="{{index}}">
+        <!--<view class='textMes' wx:for="{{tasteList}}" wx:key="{{item.id}}"  data-index="{{index}}">
           <view bindtap='chosetaste' data-key='{{item.tasteKey}}'>{{item.tasteKey}}</view>
-        </view>
+        </view>-->
+        <radio-group class="radio-group" bindchange="chosetaste" >
+        <label class="radio" wx:for="{{tasteList}}" wx:key="{{item.id}}"  data-index="{{index}}">
+           <view data-key='{{item.tasteKey}}'>
+              <radio color="#007aff" value="{{item.tasteKey}}" />{{item.tasteKey}}
+          </view>
+        </label>
+       </radio-group>
         <template is='addchar' data='{{selectCount}}'/>
       </scroll-view>
     </view>
+     
+
+     <view class='tprice'>
+        <view class='modal-title'>￥</view>
+        <view class='modal-num'>{{choseproduct.price}}</view>
+        元/{{choseproduct.unit}}
+     </view>
   </modal>
 
 </view>

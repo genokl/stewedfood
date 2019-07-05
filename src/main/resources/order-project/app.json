@@ -9,7 +9,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#87CEEB",
     "navigationBarTitleText": "懒狗儿的小店",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true

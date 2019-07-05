@@ -1,5 +1,6 @@
 package cn.zgyt.basic.bean.vo;
 
+import cn.zgyt.basic.bean.Order;
 import cn.zgyt.basic.bean.Product;
 import cn.zgyt.basic.bean.ProductType;
 

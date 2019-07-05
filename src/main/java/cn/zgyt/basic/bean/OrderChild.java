@@ -2,6 +2,7 @@ package cn.zgyt.basic.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -49,8 +51,9 @@ public class OrderChild  implements Serializable {
 //	private Order order;
 	
 	@ApiModelProperty(value = "产品口味 外键")
-	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-	private Taste taste;
+//	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(targetEntity=Taste.class,  cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Taste> tastes;
 
 	
 	
@@ -82,17 +85,18 @@ public class OrderChild  implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Taste getTaste() {
-		return taste;
-	}
-	public void setTaste(Taste taste) {
-		this.taste = taste;
-	}
+	
 	public String getChildAmount() {
 		return childAmount;
 	}
 	public void setChildAmount(String childAmount) {
 		this.childAmount = childAmount;
+	}
+	public List<Taste> getTastes() {
+		return tastes;
+	}
+	public void setTastes(List<Taste> tastes) {
+		this.tastes = tastes;
 	}
 	
     												 

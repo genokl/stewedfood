@@ -10,12 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.alibaba.fastjson.annotation.JSONField;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -44,6 +42,9 @@ public class Order implements Serializable {
 	@ApiModelProperty(value = "订单创建时间")
 	private Date cteateDate;	
 	
+	@ApiModelProperty(value = "订单支付时间")
+	private Date payDate;	
+	
 	@ApiModelProperty(value = "是否完成支付")
 	private Integer isPay;		  
 	@ApiModelProperty(value = "是否收货")
@@ -64,6 +65,7 @@ public class Order implements Serializable {
 	
 	@ApiModelProperty(value = "订单产品子表")//mappedBy="order",
 	@OneToMany(targetEntity=OrderChild.class,  cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "order_id")
 	private List<OrderChild> orderChilds;
 
 	
@@ -174,6 +176,14 @@ public class Order implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Date getPayDate() {
+		return payDate;
+	}
+
+	public void setPayDate(Date payDate) {
+		this.payDate = payDate;
 	}
     
 	
