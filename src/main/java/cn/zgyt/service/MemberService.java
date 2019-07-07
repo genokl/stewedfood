@@ -45,7 +45,7 @@ public class MemberService {
 //			m.setUnionId(tUnionId);
 			return m;
 		}else{
-			Member rm = mm;
+			Member rm = m;
 			// 会员管理系统小程序
 //			rm.setHeadImg(userInfo.getString("avatarUrl"));
 //			rm.setSex(userInfo.getInteger("gender"));

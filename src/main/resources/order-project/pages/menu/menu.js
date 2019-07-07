@@ -7,6 +7,7 @@ var config = app.config;
 
 Page({
   data: {
+    picPath:config.picPath,
     selected:[],
     selectCount:0,
     chosetaste:"",
@@ -133,7 +134,7 @@ Page({
     if(select!=null){
       dd["select"] = select;
     }
-    comm.globalObj.requestHttps("/xcx/productType/datalist", dd, function (d) {
+    comm.globalObj.requestGetHttps("/xcx/productType/datalist", dd, function (d) {
       if (d.statusCode == 1) {
         // console.log(d)
         var info=d.info;

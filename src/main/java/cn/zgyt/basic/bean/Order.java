@@ -60,7 +60,7 @@ public class Order implements Serializable {
 	private String phone;
 	
 	@ApiModelProperty(value = "订单所属用户")
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.REFRESH)
 	private Member member;
 	
 	@ApiModelProperty(value = "订单产品子表")//mappedBy="order",

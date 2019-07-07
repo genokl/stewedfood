@@ -11,9 +11,9 @@ App({
     wx.setStorageSync('logs', logs)
 
     // // 登录
-    comm.globalObj.memberLogin(1, function (d) {
+    // comm.globalObj.memberLogin(1, function (d) {
 
-    })
+    // })
 
     // wx.login({
     //   success: res => {

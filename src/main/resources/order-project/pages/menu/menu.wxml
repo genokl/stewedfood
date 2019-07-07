@@ -8,7 +8,7 @@
   <view class="item-content">
     <view class="{{orderCount.num === 0 ? 'box' : 'box active'}}">
       <view class="item" wx:for="{{items}}" wx:key="{{item.id}}">
-        <image src="image/item-m.jpg"></image>
+        <image src="{{picPath}}{{item.productSynopsisImg}}"></image>
         <text class="title">{{item.title}}</text>
         <text class="price">￥ {{item.price}} 元/ {{item.unit}}</text>
         <text class="{{item.active ? 'btn active' : 'btn'}}" bindtap='selectTaste' data-id="{{item.id}}" data-index="{{index}}" >添加</text>

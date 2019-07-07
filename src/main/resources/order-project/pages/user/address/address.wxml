@@ -1,0 +1,34 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="section">
+      <input type="text" hidden="true" value="{{logistic.id}}" name="id"/>
+      收货人姓名：
+      <input type="text" name="receiverName" placeholder="" value="{{logistic.receiverName}}"/>
+    </view>
+    <view class="section">
+       电话号码：
+      <input type="text" name="phone" placeholder="" value="{{logistic.phone}}"/>
+    </view>
+    <view class="section" >
+      <input type="text" name="address1" value="送货地区：廊坊市香河县县城（不可修改）" disabled="disable" />
+    </view>
+    <!--<view class="section">
+      <picker bindchange="bindPickerChangequArr" value="{{quIndex}}" range="{{quArr}}">
+        <view class="picker">
+          选择地区：香河县
+          <input hidden="true" name="town" value="香河县"/>
+        </view>
+      </picker>
+    </view>-->
+    <view class="section">
+    详细地址：
+      <input type="text" class="ww" name="address" placeholder="" value="{{logistic.address}}"/>
+    </view>
+    <view>
+      <label></label>
+    </view>
+    <view class="btn-area">
+      <button formType="submit">保存地址</button>
+    </view>
+  </form>
+</view>

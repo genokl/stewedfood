@@ -70,7 +70,7 @@ var globalObj = {
     }
   },
   // 新请求方  （url 请求地址相对路径，rData 请求参数json 类型，callbackFn 请求回调函数）
-  requestHttps: function (url, rData, callbackFn) {
+  requestGetHttps: function (url, rData, callbackFn) {
     if (rData == null) {
       rData = {};
     }
@@ -87,6 +87,30 @@ var globalObj = {
           if (res.data.statsus==null){
             callbackFn(res.data);
           }else{
+            callbackFn(res.data);
+          }
+        },
+        fail: function () { console.log("请求失败！" + url) }, complete: function () { }
+      })
+    });
+  },
+  requestPostHttps: function (url, rData, callbackFn) {
+    if (rData == null) {
+      rData = {};
+    }
+    globalObj.memberLogin(1, function () {
+      rData["xcxLastRequestTime"] = new Date().getTime()
+      rData["xcxLoginMemberId"] = wx.getStorageSync("xcxLoginMemberId");
+      wx.request({
+        url: Config.basePath + url,
+        data: rData,
+        method: 'POST',
+        header: { 'content-type': 'application/json;charset=UTF-8', 'Cookie': 'JSESSIONID=' + wx.getStorageSync("loginSessionId") },
+        success: function (res) {
+          wx.setStorage({ key: 'xcxLastRequestTime', data: res.data.xcxLastRequestTime });
+          if (res.data.statsus == null) {
+            callbackFn(res.data);
+          } else {
             callbackFn(res.data);
           }
         },

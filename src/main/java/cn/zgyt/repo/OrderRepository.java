@@ -13,7 +13,7 @@ import cn.zgyt.basic.bean.Order;
 
 @RepositoryRestResource(path="order")
 @Transactional(propagation=Propagation.REQUIRED)
-public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpecificationExecutor<Order> {
+public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecificationExecutor<Order> {
 	
 	/**
 	 * 查询父级菜单列表

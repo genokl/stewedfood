@@ -1,9 +1,13 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var comm = app.comm;
+var tools = app.tools;
+var config = app.config;
 
 Page({
   data: {
+    picPath: config.picPath,
     // 统计商品数量和价格
     orderCount: {
       num: 0,
@@ -67,6 +71,7 @@ Page({
   initshopcardata: function (d) {
     var shoppingcar = wx.getStorageSync('shoppingcar');
     this.setnumdata(shoppingcar);
+    // console.log(shoppingcar)
     this.setData({
       items: shoppingcar
     });

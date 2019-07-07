@@ -1,5 +1,8 @@
 package cn.zgyt.basic.resource;
 
+import java.util.List;
+
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 
 import cn.zgyt.basic.bean.Order;
@@ -17,4 +20,7 @@ public class OrderResource extends Resource<Order> {
 		super(content);
 	}
 
+	public OrderResource(Order content, List<Link> links) {
+		super(content, links);
+	}
 }

@@ -5,9 +5,10 @@ const app = getApp()
 var comm = app.comm;
 var tools = app.tools;
 var config = app.config;
-// var common = require("../../utils/common.js");
+
 Page({
   data: {
+    picPath: config.picPath,
     winWidth: 0,
     winHeight: 0,
     // tab切换  
@@ -15,23 +16,30 @@ Page({
     isStatus: 'pay',//10待付款，20待发货，30待收货 40、50已完成
     page: 0,
     refundpage: 0,
-    orderList0: [],
+    orderList: [],
     orderList1: [],
-    orderList2: [],
     orderList3: [],
     orderList4: [],
+    orderList5: [],
+    // orderList4: [],
+  },
+  onShow: function (options){
+    this.loadOrderList(options);
   },
   onLoad: function (options) {
+    if (options.length==null){
+      options["currentTab"]=0;
+      options["otype"] = 'pay';
+    }
     this.initSystemInfo();
     this.setData({
       currentTab: parseInt(options.currentTab),
       isStatus: options.otype
     });
-
     if (this.data.currentTab == 4) {
       this.loadReturnOrderList();
     } else {
-      this.loadOrderList();
+      this.loadOrderList(options);
     }
   },
   getOrderStatus: function () {
@@ -46,40 +54,59 @@ Page({
       title: '提示',
       content: '你确定要取消订单吗？',
       success: function (res) {
-        res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Order/orders_edit',
-          method: 'post',
-          data: {
-            id: orderId,
-            type: 'cancel',
-          },
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            //--init data
-            var status = res.data.status;
-            if (status == 1) {
-              wx.showToast({
-                title: '操作成功！',
-                duration: 2000
+        console.log(res)
+        if (res.confirm){
+          var dd={};
+          dd["id"] = orderId;
+          comm.globalObj.requestGetHttps("/xcx/order/delete", dd, function (d) {
+            console.log(d.info)
+            if (d.statusCode == 1) {
+              that.setData({
+                orderList: d.info,
               });
-              that.loadOrderList();
-            } else {
-              wx.showToast({
-                title: res.data.err,
-                duration: 2000
-              });
+              var info = d.info;
+              // that.initProductTypeList(info, 0, that)
+              // console.log(info)
+            } else if (d.statusCode == -7) {
+              //app.Tools.alert("提示", d.errorMessage, function () { })
+              console.log(d.errorMessage)
             }
-          },
-          fail: function () {
-            // fail
-            wx.showToast({
-              title: '网络异常！',
-              duration: 2000
-            });
-          }
-        });
+          })
+        }
+        // res.confirm && wx.request({
+        //   url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+        //   method: 'post',
+        //   data: {
+        //     id: orderId,
+        //     type: 'cancel',
+        //   },
+        //   header: {
+        //     'Content-Type': 'application/x-www-form-urlencoded'
+        //   },
+        //   success: function (res) {
+        //     //--init data
+        //     var status = res.data.status;
+        //     if (status == 1) {
+        //       wx.showToast({
+        //         title: '操作成功！',
+        //         duration: 2000
+        //       });
+        //       that.loadOrderList();
+        //     } else {
+        //       wx.showToast({
+        //         title: res.data.err,
+        //         duration: 2000
+        //       });
+        //     }
+        //   },
+        //   fail: function () {
+        //     // fail
+        //     wx.showToast({
+        //       title: '网络异常！',
+        //       duration: 2000
+        //     });
+        //   }
+        // });
 
       }
     });
@@ -132,59 +159,89 @@ Page({
     });
   },
 
-  loadOrderList: function () {
+  loadOrderList: function (o) {
+    // console.log(o.otype)
+    var dd={};
+    if (o.otype=='pay'){//待付款
+      dd["isPay"]=0;
+    } else if (o.otype == 'deliver'){
+      dd["isPay"] = 1;
+      dd["isTake"] = 0;
+    } else if (o.otype == 'finish') {
+      dd["isTake"] = 1;
+    } else if (o.otype == 'all') {//全部订单
+
+    } else if (o.otype == 'today') {//当日订单
+      dd["payDate"] = new Date();
+    }
     var that = this;
-    wx.request({
-      url: app.d.ceshiUrl + '/Api/Order/index',
-      method: 'post',
-      data: {
-        uid: app.d.userId,
-        order_type: that.data.isStatus,
-        page: that.data.page,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        //--init data        
-        var status = res.data.status;
-        var list = res.data.ord;
-        switch (that.data.currentTab) {
-          case 0:
-            that.setData({
-              orderList0: list,
-            });
-            break;
-          case 1:
-            that.setData({
-              orderList1: list,
-            });
-            break;
-          case 2:
-            that.setData({
-              orderList2: list,
-            });
-            break;
-          case 3:
-            that.setData({
-              orderList3: list,
-            });
-            break;
-          case 4:
-            that.setData({
-              orderList4: list,
-            });
-            break;
-        }
-      },
-      fail: function () {
-        // fail
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
+    dd["pageSize"]=10;
+    dd["pageNumber"] = 1;
+    comm.globalObj.requestPostHttps("/xcx/order/datalist", dd, function (d) {
+      console.log(d.info)
+      if (d.statusCode == 1) {
+        that.setData({
+          orderList: d.info, 
         });
+        var info = d.info;
+        // that.initProductTypeList(info, 0, that)
+        // console.log(info)
+      } else if (d.statusCode == -7) {
+        //app.Tools.alert("提示", d.errorMessage, function () { })
+        console.log(d.errorMessage)
       }
-    });
+    })
+    // wx.request({
+    //   url: app.d.ceshiUrl + '/Api/Order/index',
+    //   method: 'post',
+    //   data: {
+    //     uid: app.d.userId,
+    //     order_type: that.data.isStatus,
+    //     page: that.data.page,
+    //   },
+    //   header: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   success: function (res) {
+    //     //--init data        
+    //     var status = res.data.status;
+    //     var list = res.data.ord;
+    //     switch (that.data.currentTab) {
+    //       case 0:
+    //         that.setData({
+    //           orderList0: list,
+    //         });
+    //         break;
+    //       case 1:
+    //         that.setData({
+    //           orderList1: list,
+    //         });
+    //         break;
+    //       case 2:
+    //         that.setData({
+    //           orderList2: list,
+    //         });
+    //         break;
+    //       case 3:
+    //         that.setData({
+    //           orderList3: list,
+    //         });
+    //         break;
+    //       case 4:
+    //         that.setData({
+    //           orderList4: list,
+    //         });
+    //         break;
+    //     }
+    //   },
+    //   fail: function () {
+    //     // fail
+    //     wx.showToast({
+    //       title: '网络异常！',
+    //       duration: 2000
+    //     });
+    //   }
+    // });
   },
 
   loadReturnOrderList: function () {
@@ -251,24 +308,28 @@ Page({
       that.setData({
         currentTab: parseInt(current),
         isStatus: e.target.dataset.otype,
+        orderList:[]
       });
 
       //没有数据就进行加载
+      var options={};
+      options["currentTab"] = that.data.currentTab;
+      options["otype"] = e.target.dataset.otype;
       switch (that.data.currentTab) {
         case 0:
-          !that.data.orderList0.length && that.loadOrderList();
+          !that.data.orderList.length && that.loadOrderList(options);
           break;
         case 1:
-          !that.data.orderList1.length && that.loadOrderList();
-          break;
-        case 2:
-          !that.data.orderList2.length && that.loadOrderList();
+          !that.data.orderList.length && that.loadOrderList(options);
           break;
         case 3:
-          !that.data.orderList3.length && that.loadOrderList();
+          !that.data.orderList.length && that.loadOrderList(options);
           break;
         case 4:
-          that.data.orderList4.length = 0;
+          !that.data.orderList.length && that.loadOrderList(options);
+          break;
+        case 5:
+          that.data.orderList.length = 0;
           that.loadReturnOrderList();
           break;
       }

@@ -21,7 +21,6 @@ public final class ResponseUtils {
 		long lastRequstTime = System.currentTimeMillis();
 		jo.put(XcxConstant.XCX_LAST_REQUEST_TIME,lastRequstTime);
 		jo.put(XcxConstant.XCX_REQUEST_KEY, XcxUtil.createResponseKey(request,lastRequstTime));
-		
 		render1(response, "text/plain;charset=UTF-8", JSON.toJSONString(jo, SerializerFeature.DisableCircularReferenceDetect));
 	}
 	

@@ -43,7 +43,7 @@ public class OrderChild  implements Serializable {
 	private Integer count;
 	
 	@ApiModelProperty(value = "产品")
-	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.REFRESH)
 	private Product product;
 	
 //	@ApiModelProperty(value = "订单主表")
@@ -52,7 +52,7 @@ public class OrderChild  implements Serializable {
 	
 	@ApiModelProperty(value = "产品口味 外键")
 //	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-	@OneToMany(targetEntity=Taste.class,  cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(targetEntity=Taste.class,  cascade=CascadeType.REFRESH, fetch=FetchType.LAZY)
 	private List<Taste> tastes;
 
 	
