@@ -32,7 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // tools.redirectTo("/pages/menu/menu", "");
+    // tools.redirectTo("/pages/order/order", "");
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

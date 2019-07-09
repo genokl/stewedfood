@@ -1,4 +1,15 @@
 /* pages/user/dingdan.wxss */
+.btn{
+  display: inline-block;
+  font-size: 30rpx;
+  margin-right: 20rpx;
+  border: 1px solid #fc0628;
+  color: #fc0628;
+  width: 150rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  float: right;
+}
 .swiper-tab{  
     width: 100%;  
     border-bottom: 1px solid #eee;  

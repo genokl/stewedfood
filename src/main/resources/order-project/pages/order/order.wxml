@@ -18,23 +18,23 @@
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
 
-    <view class="shop df" wx:for="{{orderList}}" wx:for-index="idx" wx:for-item="itemss">        
-        <view  wx:for="{{itemss.orderChilds}}" wx:for-index="idc" wx:for-item="ocs">
-            <image class="sh_slt" src="{{picPath}}{{ocs.product.productSynopsisImg}}"></image>
-              <view class="df_1">            
-                  <view class="sp_text">
+    <view style='padding-left:30rpx;border-bottom:1rpx solid #CCC;margin-bottom:30rpx;padding-bottom:30rpx;overflow:auto;position:relative;' wx:for="{{orderList}}" wx:for-index="idx" wx:for-item="itemss">        
+        <view style='position:relative;' wx:for="{{itemss.orderChilds}}" wx:for-index="idc" wx:for-item="ocs">
+            <image style='width:160rpx;height:160rpx;' src="{{picPath}}{{ocs.product.productSynopsisImg}}"></image>
+              <view>            
+                  <view>
                       <!--<navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
                       </navigator>-->
                       <view class="" >
-                        <view class="sp_tit ovh1">{{ocs.product.title}}</view>
-                        <view class="sp_neb">¥ {{ocs.product.price}} ×{{ocs.count}} </view>
+                        <view style='position:absolute;top:10rpx;left:200rpx;'>{{ocs.product.title}}</view>
+                        <view style='position:absolute;top:50rpx;right:20rpx;font-size:21rpx;'>¥ {{ocs.product.price}} ×{{ocs.count}} </view>
                       </view>
                   </view>
               </view>
         </view>
-        <view class="sp_neb">合计：¥ {{itemss.amount}} </view>
-        <view class="font_12 red fl_r mr_5" bindtap="removeOrder" data-order-id="{{itemss.id}}">取消订单</view>
-        <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
+        <view style='position:absolute;right:20rpx;bottom:100rpx;font-size:30rpx;color:#CCC;'>合计：¥ {{itemss.amount}} </view>
+        <view bindtap="removeOrder" class='btn' data-order-id="{{itemss.id}}">取消订单</view>
+        <navigator url="../order/detail?orderId={{item.id}}" class='btn'>订单详情</navigator>
     </view>
   </swiper-item>
 
